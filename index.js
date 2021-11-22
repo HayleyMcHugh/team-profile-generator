@@ -1,89 +1,107 @@
 const inquirer = require('inquirer');
-const fs = require('fs');
+const Employee = require('./lib/employee');
+const Manager = require('./lib/manager');
+const Engineer = require('./lib/engineer');
+const Intern = require('./lib/intern');
+const generateApp = require('./src/app-template');
+const writeToFile = require('./src/generate-app');
 
-const generateHTML = require('./dist/index.html')
+let manager = [];
+let engineer = [];
+let intern = [];
+let employeeArray = {manager, engineer, intern};
 
-const questions = [
-    {
-        type: 'input',
-        message: 'What is the team managers name?',
-        name: 'manager-name',
-    },
-    {
-        type: 'input',
-        message: 'What is the team managers employee id?',
-        name: 'manager-id',
-    },
-    {
-        type: 'input',
-        message: 'What is the team managers email address?',
-        name: 'manager-email',
-    },
-    {
-        type: 'input',
-        message: 'What is the team managers office number?.',
-        name: 'manager-office',
-    },
-    {
-        type: 'list',
-        message: 'Choose whether youd like to add an engineer or an intern to your team.',
-        choices: ['Engineer', 'Intern'],
-        name: 'employee-choices',
-    },
-    {
-        type: 'input',
-        message: 'What is the engineers name?',
-        name: 'engineer-name',
-    },
-    {
-        type: 'input',
-        message: 'What is the engineers employee id?',
-        name: 'engineer-id',
-    },
-    {
-        type: 'input',
-        message: 'What is the engineers email address?',
-        name: 'engineer-email',
-    },
-    {
-        type: 'input',
-        message: 'What is the engineers office number?.',
-        name: 'engineer-office',
-    },
-    {
-        type: 'input',
-        message: 'What is the interns name?',
-        name: 'intern-name',
-    },
-    {
-        type: 'input',
-        message: 'What is the interns employee id?',
-        name: 'intern-id',
-    },
-    {
-        type: 'input',
-        message: 'What is the interns email address?',
-        name: 'intern-email',
-    },
-    {
-        type: 'input',
-        message: 'What is the interns office number?.',
-        name: 'intern-office',
-    },
-]
+function Prompt() {
 
+    return inquirer
+        .prompt([
+        {
+            type: 'list',
+            message: "What is the employee's role?",
+            choices: ['Manager', 'Engineer', 'Intern'],
+            name: 'role',
+        },  
+        {
+            type: 'text',
+            message: "What is the employee's name?",
+            name: 'name',
+        },
+        {
+            type: 'text',
+            message: "What is the employee's ID?",
+            name: 'id',
+        },
+        {
+            type: 'text',
+            message: "What is the employee's email?",
+            name: 'email',
+        }])
+        .then(({role, name, id, email}) => {
+            if (role === 'Manager') {
+                return inquirer
+                    .prompt([{
+                        type: 'text',
+                        message: "What is the manager's office number?",
+                        name: 'office'
+                    },
+                    {
+                        type: 'confirm',
+                        message: "Do you want to add another employee?",
+                        name: 'anotherEmployee',
+                        default: false
+                    }])
+                    .then(({office, anotherEmployee}) => {
+                        manager.push(new Manager(name, id, email, office))
+                        if (anotherEmployee) {
+                            return Prompt();
+                        }
+                    })
+            } else if (role === 'Engineer') {
+                return inquirer
+                    .prompt([{
+                        type: 'text',
+                        message: "What is the engineer's Github username?",
+                        name: 'github',
+                    },
+                    {
+                        type: 'confirm',
+                        message: "Do you want to add another employee?",
+                        name: 'anotherEmployee',
+                        default: false
+                    }])
+                    .then(({github, anotherEmployee}) => {
+                        engineer.push(new Engineer(name, id, email, github))
+                        if (anotherEmployee) {
+                            return Prompt();
+                        }
+                    })
+            } else if (role === 'Intern') {
+                return inquirer
+                    .prompt([{
+                        type: 'text',
+                        message: "What is the intern's school?",
+                        name: 'school'
+                    },
+                    {
+                        type: 'confirm',
+                        message: "Do you want to add another employee?",
+                        name: 'anotherEmployee',
+                        default: false
+                    }])
+                    .then(({school, anotherEmployee}) => {
+                        intern.push(new Intern(name, id, email, school))
+                        if (anotherEmployee) {
+                            return Prompt();
+                        }
+                    })
+            }
+        })
+};
 
-fs.writeFile(fileName, data, error => {
-    if (error) {
-        return console.log(error);
-    }
-        console.log("Success! Your team profile generator has been created!")
-});
-
-function init () {
-    const userResponses = inquirer.prompt(questions);
-    const html = generateHTML(userResponses);
-    fs.writeFile('exampleindex.html', html);
-}
-
-init();
+Prompt()
+    .then(teamData => {
+        return generateApp(employeeArray)
+    })
+    .then(pageHTML => {
+        return writeToFile(pageHTML)
+    })
