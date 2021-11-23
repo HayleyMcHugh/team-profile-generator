@@ -1,0 +1,25 @@
+.teamcards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.card {
+    text-align: center;
+    background-color: lightblue;
+}
+
+body {
+    background-color: rgb(247, 247, 233);
+}
+
+nav {
+    padding-top: 3%;
+    background-color: rgb(235, 86, 86);
+    color: white;
+}
