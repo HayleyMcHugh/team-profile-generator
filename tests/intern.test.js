@@ -1,4 +1,4 @@
-const Intern = require('./lib/intern.js')
+const Intern = require('../lib/intern.js')
 
 test('generates an intern object', () => {
     const intern = new Intern('John Adams', '3', 'johnadams@adams.com', 'college')
