@@ -1,7 +1,7 @@
 const Engineer = require('../lib/engineer.js')
 
 test('generates an engineer object', () => {
-    const engineer = new Engineer ('Sam Smith', '2', 'samsmith@smith.com', 'samsmithit')
+    const engineer = new Engineer ('Sam Smith', '2', 'samsmith@smith.com', 'samsmithgit')
 
     expect(engineer.name).toBe('Sam Smith');
     expect(engineer.id).toBe('2');
@@ -10,13 +10,13 @@ test('generates an engineer object', () => {
 });
 
 test('gets engineers github username', () => {
-    const engineer = new Engineer ('Sam Smith', '2', 'samsmith@smith.com', 'samsmithit')
+    const engineer = new Engineer ('Sam Smith', '2', 'samsmith@smith.com', 'samsmithgit')
 
     expect(engineer.getGitHub()).toEqual(expect.stringContaining('samsmithgit'));
 });
 
 test('gets engineers role', () => {
-    const engineer = new Engineer ('Sam Smith', '2', 'samsmith@smith.com', 'samsmithit')
+    const engineer = new Engineer ('Sam Smith', '2', 'samsmith@smith.com', 'samsmithgit')
     
     expect(engineer.getRole()).toEqual(expect.stringContaining('Engineer'))
 });
