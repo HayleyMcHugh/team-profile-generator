@@ -1,8 +1,8 @@
 const inquirer = require('inquirer');
-const Employee = require('./lib/employee');
-const Manager = require('./lib/manager');
-const Engineer = require('./lib/engineer');
-const Intern = require('./lib/intern');
+const Employee = require('./lib/Employee');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
 const generateApp = require('./src/app-template');
 const writeToFile = require('./src/generate-app');
 

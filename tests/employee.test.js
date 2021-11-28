@@ -1,33 +1,59 @@
-const Employee = require('../lib/employee.js')
+const Employee = require("../lib/Employee");
 
-test('generates an employee object', () => {
-    const employee = new Employee('Jane Doe', '1', 'janedoe@jane.com');
+describe("Employee", () => {
+    it("Can create an employee object", () => {
+        const e = new Employee();
+        expect(typeof(e)).toBe("object");
+    });
 
-    expect(employee.name).toBe('Jane Doe');
-    expect(employee.id).toBe('1');
-    expect(employee.email).toBe('janedoe@jane.com');
-});
+    it("Can set name via constructor arguments", () => {
+        const name = "Jane";
+        const e = new Employee(name);
+        expect(e.name).toBe(name);
+    });
 
-test('gets employees name', () => {
-    const employee = new Employee('Jane Doe', '1', 'janedoe@jane.com');
+    it("Can set id via constructor argument", () => {
+        const testValue = 100;
+        const e = new Employee("Foo", testValue);
+        expect(e.id).toBe(testValue);
+    });
 
-    expect(employee.getName()).toEqual(expect.stringContaining('Jane Doe'));
-});
+    it("Can set email via constructor argument", () => {
+        const testValue = "test@test.com";
+        const e = new Employee("Foo", 1, testValue);
+        expect(e.email).toBe(testValue);
+    });
 
-test('gets employees id', () => {
-    const employee = new Employee('Jane Doe', '1', 'janedoe@jane.com');
-
-    expect(employee.getID()).toEqual(expect.stringContaining('1'));
-});
-
-test('gets employees email', () => {
-    const employee = new Employee('Jane Doe', '1', 'janedoe@jane.com');
-
-    expect(employee.getEmail()).toEqual(expect.stringContaining('janedoe@jane.com'));
-});
-
-test('gets employees role', () => {
-    const employee = new Employee('Jane Doe', '1', 'janedoe@jane.com');
-
-    expect(employee.getRole()).toEqual(expect.stringContaining('Employee'));
+    describe("getName", () => {
+        it("Can get name via getName()", () => {
+            const testValue = "Jane";
+            const e = new Employee(testValue);
+            expect(e.getName()).toBe(testValue);
+        });
+    });
+        
+    describe("getId", () => {
+        it("Can get id via getId()", () => {
+            const testValue = 100;
+            const e = new Employee("Foo", testValue);
+            expect(e.getId()).toBe(testValue);
+        });
+    });
+        
+    describe("getEmail", () => {
+        it("Can get email via getEmail()", () => {
+            const testValue = "test@test.com";
+            const e = new Employee("Foo", 1, testValue);
+            expect(e.getEmail()).toBe(testValue);
+        });
+    });
+        
+    describe("getRole", () => {
+        it("getRole() should return \"Employee\"", () => {
+            const testValue = "Employee";
+            const e = new Employee("Jane", 1, "test@test.com");
+            expect(e.getRole()).toBe(testValue);
+        });
+    });
+    
 });
