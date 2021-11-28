@@ -35,6 +35,6 @@ You can run tests in the command line by running 'npm run test Employee(Manager,
 ## Questions
 If you have any questions at all, below are links to my github as well as my email address. Feel free to contact me!
 
-[Github](github.com/HayleyMcHugh "Github")
+<a href="https://github.com/HayleyMcHugh">Github</a>
 
-[Email](hayleym522@gmail.com "Email")
+<a href="mailto:hayleym522@gmail.com">Email</a> 
