@@ -26,8 +26,6 @@ Once you run 'node index.js', you will be asked a series of questions about your
 
 <img src="./dist/images/profilegenscreenshot.jpeg" alt="full screencapture of team profile generator">
 
-<a href="https://hayleymchugh.github.io/team-profile-generator/">Deployed Team-Profile-Generator</a>
-
 ## Credits
 n/a
 
