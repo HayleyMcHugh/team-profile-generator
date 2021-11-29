@@ -26,7 +26,8 @@ Once you run 'node index.js', you will be asked a series of questions about your
 
 <img src="./dist/images/profilegenscreenshot.jpeg" alt="full screencapture of team profile generator">
 
-<a href="file:///Users/hayleymchugh/ucsdbootcamp/homeworks/team-profile-generator/dist/index.html">Deployed Team-Profile-Generator</a>
+Sample HTML file: file:///Users/hayleymchugh/ucsdbootcamp/homeworks/team-profile-generator/dist/index.html 
+(copy and paste in browser)
 
 ## Credits
 n/a
